@@ -2,6 +2,8 @@
 
 namespace Test\Functional;
 
+require_once(__DIR__ . '/../../src/Models/checkRequest.php');
+
 class AmazonMerchantTest extends BaseTestCase {
     
     public function testGetEligibleShippingServices() {
