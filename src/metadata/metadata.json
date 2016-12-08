@@ -1,281 +1,306 @@
 {
-  "package": "AmazonMerchant",
-  "tagline": "Amazon Merchant API",
-  "description": "The Recommendations API section of Amazon MWS enables you to programmatically retrieve Amazon Selling Coach recommendations by recommendation category. A recommendation is an actionable, timely, and personalized opportunity to increase your sales and performance.",
-  "image": "http://logo.clearbit.com/amazon.com",
-  "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-AmazonMerchant-package",
-  "accounts": {
+    "package": "AmazonMerchant",
+    "tagline": "Amazon Merchant API",
+    "description": "Manage Amazon shipments and listings.",
+    "image": "http:\/\/logo.clearbit.com\/amazon.com",
+    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-AmazonMerchant-package",
+    "keywords": ["API", "MWS", "amazon", "bid", "buy", "ecommerce", "marketplace", "sell", "shop", "shopping", "store"],
+    "accounts": {
         "domain": "amazon.com",
-        "credentials": [
-            "apiKey",
-            "apiSecret"
-        ]
+        "credentials": ["apiKey", "apiSecret"]
     },
-  "blocks": [
-    {
-      "name": "getEligibleShippingServices",
-      "description": "The GetLastUpdatedTimeForRecommendations operation enables you to check whether there are active recommendations for you in a given recommendation category, and if there are, to check when the recommendations for that category were last updated.",
-      "args": [
-        {
-          "name": "apiKey",
-          "type": "credentials",
-          "info": "Required: API key obtained from Amazon."
+    "blocks": [{
+            "name": "getEligibleShippingServices",
+            "description": "The GetEligibleShippingServices operation returns a list of shipping service offers that satisfy the shipment request details that you specify.",
+            "args": [{
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key obtained from Amazon.",
+                    "required": true
+                }, {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "API secret obtained from Amazon.",
+                    "required": true
+                }, {
+                    "name": "appName",
+                    "type": "String",
+                    "info": "The Application name.",
+                    "required": true
+                }, {
+                    "name": "appVersion",
+                    "type": "String",
+                    "info": "The version of the application.",
+                    "required": true
+                }, {
+                    "name": "region",
+                    "type": "String",
+                    "test": "EU",
+                    "info": "The region for endpoint. For example: EU. Possible values: 'NA' (North America), 'EU' (Europe), 'IN' (India), 'CN' (China), 'JP' (Japan). NOTE: This operation is only available in the US, Germany, and UK marketplaces.",
+                    "required": true
+                }, {
+                    "name": "merchantId",
+                    "type": "String",
+                    "info": "The merchant ID.",
+                    "required": true
+                }, {
+                    "name": "amazonOrderId",
+                    "type": "String",
+                    "info": "An Amazon-defined order identifier in 3-7-7 format.",
+                    "required": true
+                }, {
+                    "name": "itemList",
+                    "type": "JSON",
+                    "info": "Array of objects. A list of items to be included in a shipment. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "shipFromAddress",
+                    "type": "JSON",
+                    "info": "Json object. The address from which the shipment ships. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "packageDimensions",
+                    "type": "JSON",
+                    "info": "Json object. The package dimensions. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "weight",
+                    "type": "JSON",
+                    "info": "Json object. The package weight. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "shippingServiceOptions",
+                    "type": "JSON",
+                    "info": "Json object. Extra services offered by the carrier. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "sellerOrderId",
+                    "type": "String",
+                    "info": "A seller-defined order identifier.",
+                    "required": false
+                }, {
+                    "name": "mustArriveByDate",
+                    "type": "String",
+                    "info": "The date by which the package must arrive to keep the promise to the customer, in ISO 8601 date time format (yyyy-MM-ddTHH:mm:ss.sssZ\u00b1hhmm). If MustArriveByDate is specified, only shipping service offers that can be delivered by that date are returned.",
+                    "required": false
+                }, {
+                    "name": "shipDate",
+                    "type": "String",
+                    "info": "When used in a request, this is the date that the seller wants to ship the package. When used in a response, this is the date that the package can be shipped by the indicated method. In ISO 8601 date time format (yyyy-MM-ddTHH:mm:ss.sssZ\u00b1hhmm)",
+                    "required": false
+                }, {
+                    "name": "labelCustomization",
+                    "type": "JSON",
+                    "info": "Label customization options. See README for more deatils.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
         }, {
-          "name": "apiSecret",
-          "type": "credentials",
-          "info": "Required: API secret  obtained from Amazon."
+            "name": "createShipment",
+            "description": "This endpoint allows to create a new shipment. Important: The CreateShipment operation returns a ShipmentId value. Be sure to store this value for future use.",
+            "args": [{
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key obtained from Amazon.",
+                    "required": true
+                }, {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "API secret obtained from Amazon.",
+                    "required": true
+                }, {
+                    "name": "appName",
+                    "type": "String",
+                    "info": "The Application name.",
+                    "required": true
+                }, {
+                    "name": "appVersion",
+                    "type": "String",
+                    "info": "The version of the application.",
+                    "required": true
+                }, {
+                    "name": "region",
+                    "type": "String",
+                    "test": "EU",
+                    "info": "The region for endpoint. For example: EU. Possible values: 'NA' (North America), 'EU' (Europe), 'IN' (India), 'CN' (China), 'JP' (Japan). NOTE: This operation is only available in the US, Germany, and UK marketplaces.",
+                    "required": true
+                }, {
+                    "name": "merchantId",
+                    "type": "String",
+                    "info": "The merchant ID.",
+                    "required": true
+                }, {
+                    "name": "amazonOrderId",
+                    "type": "String",
+                    "info": "An Amazon-defined order identifier in 3-7-7 format.",
+                    "required": true
+                }, {
+                    "name": "itemList",
+                    "type": "JSON",
+                    "info": "Array of objects. A list of items to be included in a shipment. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "shipFromAddress",
+                    "type": "JSON",
+                    "info": "Json object. The address from which the shipment ships. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "packageDimensions",
+                    "type": "JSON",
+                    "info": "Json object. The package dimensions. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "weight",
+                    "type": "JSON",
+                    "info": "Json object. The package weight. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "shippingServiceOptions",
+                    "type": "JSON",
+                    "info": "Json object. Extra services offered by the carrier. See README for more details.",
+                    "required": true
+                }, {
+                    "name": "sellerOrderId",
+                    "type": "String",
+                    "info": "A seller-defined order identifier.",
+                    "required": false
+                }, {
+                    "name": "mustArriveByDate",
+                    "type": "String",
+                    "info": "The date by which the package must arrive to keep the promise to the customer, in ISO 8601 date time format (yyyy-MM-ddTHH:mm:ss.sssZ\u00b1hhmm). If MustArriveByDate is specified, only shipping service offers that can be delivered by that date are returned.",
+                    "required": false
+                }, {
+                    "name": "shipDate",
+                    "type": "String",
+                    "info": "When used in a request, this is the date that the seller wants to ship the package. When used in a response, this is the date that the package can be shipped by the indicated method. In ISO 8601 date time format (yyyy-MM-ddTHH:mm:ss.sssZ\u00b1hhmm)",
+                    "required": false
+                }, {
+                    "name": "labelCustomization",
+                    "type": "JSON",
+                    "info": "Json object. Label customization options. See README for more deatils.",
+                    "required": false
+                }, {
+                    "name": "shippingServiceId",
+                    "type": "String",
+                    "info": "An Amazon-defined shipping service identifier. Get the ShippingServiceId value from a previous call to the GetEligibleShippingServices operation.",
+                    "required": true
+                }, {
+                    "name": "shippingServiceOfferId",
+                    "type": "String",
+                    "info": "An Amazon-defined shipping service offer identifier. Get the ShippingServiceOfferId value from a previous call to the GetEligibleShippingServices operation.",
+                    "required": false
+                }, {
+                    "name": "hazmatType",
+                    "type": "String",
+                    "info": "Hazardous materials options for a package. Possible values: 'None' - This package does not contain hazardous material; 'LQHazmat' - This package contains limited quantities of hazardous material.",
+                    "required": false
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
         }, {
-          "name": "appName",
-          "type": "String",
-          "info": "Required: The Application name."
+            "name": "getShipment",
+            "description": "This endpoint returns an existing shipment for the ShipmentId value that you specify.",
+            "args": [{
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key obtained from Amazon.",
+                    "required": true
+                }, {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "API secret obtained from Amazon.",
+                    "required": true
+                }, {
+                    "name": "appName",
+                    "type": "String",
+                    "info": "The Application name.",
+                    "required": true
+                }, {
+                    "name": "appVersion",
+                    "type": "String",
+                    "info": "The version of the application.",
+                    "required": true
+                }, {
+                    "name": "region",
+                    "type": "String",
+                    "test": "EU",
+                    "info": "The region for endpoint. For example: EU. Possible values: 'NA' (North America), 'EU' (Europe), 'IN' (India), 'CN' (China), 'JP' (Japan). NOTE: This operation is only available in the US, Germany, and UK marketplaces.",
+                    "required": true
+                }, {
+                    "name": "merchantId",
+                    "type": "String",
+                    "info": "The merchant ID.",
+                    "required": true
+                }, {
+                    "name": "shipmentId",
+                    "type": "String",
+                    "info": "An Amazon-defined shipment identifier. Get the shipmentId value from a previous call to the createShipment operation.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
         }, {
-          "name": "appVersion",
-          "type": "String",
-          "info": "Required: The version of the application."
-        }, {
-          "name": "region",
-          "type": "String",
-          "test": "EU",
-          "info": "Required: The region for endpoint. For example: EU. Possible values: 'NA' (North America), 'EU' (Europe), 'IN' (India), 'CN' (China), 'JP' (Japan). NOTE: This operation is only available in the US, Germany, and UK marketplaces."
-        }, {
-          "name": "merchantId",
-          "type": "String",
-          "info": "Required: The merchant ID."
-        }, {
-          "name": "amazonOrderId",
-          "type": "String",
-          "info": "Required: An Amazon-defined order identifier in 3-7-7 format."
-        }, {
-          "name": "itemList",
-          "type": "JSON",
-          "info": "Required: Array of objects. A list of items to be included in a shipment. See README for more details."
-        }, {
-          "name": "shipFromAddress",
-          "type": "JSON",
-          "info": "Required: Json object. The address from which the shipment ships. See README for more details."
-        }, {
-          "name": "packageDimensions",
-          "type": "JSON",
-          "info": "Required: Json object. The package dimensions. See README for more details."
-        }, {
-          "name": "weight",
-          "type": "JSON",
-          "info": "Required: Json object. The package weight. See README for more details."
-        }, {
-          "name": "shippingServiceOptions",
-          "type": "JSON",
-          "info": "Required: Json object. Extra services offered by the carrier. See README for more details."
-        }, {
-          "name": "sellerOrderId",
-          "type": "String",
-          "info": "Optional: A seller-defined order identifier."
-        }, {
-          "name": "mustArriveByDate",
-          "type": "String",
-          "info": "Optional: The date by which the package must arrive to keep the promise to the customer, in ISO 8601 date time format (yyyy-MM-ddTHH:mm:ss.sssZ±hhmm). If MustArriveByDate is specified, only shipping service offers that can be delivered by that date are returned."
-        }, {
-          "name": "shipDate",
-          "type": "String",
-          "info": "Optional: When used in a request, this is the date that the seller wants to ship the package. When used in a response, this is the date that the package can be shipped by the indicated method. In ISO 8601 date time format (yyyy-MM-ddTHH:mm:ss.sssZ±hhmm)"
-        }, {
-          "name": "labelCustomization",
-          "type": "JSON",
-          "info": "Optional: Label customization options. See README for more deatils."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    }, {
-      "name": "createShipment",
-      "description": "This endpoint allows to create a new shipment. Important: The CreateShipment operation returns a ShipmentId value. Be sure to store this value for future use.",
-      "args": [
-        {
-          "name": "apiKey",
-          "type": "credentials",
-          "info": "Required: API key obtained from Amazon."
-        }, {
-          "name": "apiSecret",
-          "type": "credentials",
-          "info": "Required: API secret  obtained from Amazon."
-        }, {
-          "name": "appName",
-          "type": "String",
-          "info": "Required: The Application name."
-        }, {
-          "name": "appVersion",
-          "type": "String",
-          "info": "Required: The version of the application."
-        }, {
-          "name": "region",
-          "type": "String",
-          "test": "EU",
-          "info": "Required: The region for endpoint. For example: EU. Possible values: 'NA' (North America), 'EU' (Europe), 'IN' (India), 'CN' (China), 'JP' (Japan). NOTE: This operation is only available in the US, Germany, and UK marketplaces."
-        }, {
-          "name": "merchantId",
-          "type": "String",
-          "info": "Required: The merchant ID."
-        }, {
-          "name": "amazonOrderId",
-          "type": "String",
-          "info": "Required: An Amazon-defined order identifier in 3-7-7 format."
-        }, {
-          "name": "itemList",
-          "type": "JSON",
-          "info": "Required: Array of objects. A list of items to be included in a shipment. See README for more details."
-        }, {
-          "name": "shipFromAddress",
-          "type": "JSON",
-          "info": "Required: Json object. The address from which the shipment ships. See README for more details."
-        }, {
-          "name": "packageDimensions",
-          "type": "JSON",
-          "info": "Required: Json object. The package dimensions. See README for more details."
-        }, {
-          "name": "weight",
-          "type": "JSON",
-          "info": "Required: Json object. The package weight. See README for more details."
-        }, {
-          "name": "shippingServiceOptions",
-          "type": "JSON",
-          "info": "Required: Json object. Extra services offered by the carrier. See README for more details."
-        }, {
-          "name": "sellerOrderId",
-          "type": "String",
-          "info": "Optional: A seller-defined order identifier."
-        }, {
-          "name": "mustArriveByDate",
-          "type": "String",
-          "info": "Optional: The date by which the package must arrive to keep the promise to the customer, in ISO 8601 date time format (yyyy-MM-ddTHH:mm:ss.sssZ±hhmm). If MustArriveByDate is specified, only shipping service offers that can be delivered by that date are returned."
-        }, {
-          "name": "shipDate",
-          "type": "String",
-          "info": "Optional: When used in a request, this is the date that the seller wants to ship the package. When used in a response, this is the date that the package can be shipped by the indicated method. In ISO 8601 date time format (yyyy-MM-ddTHH:mm:ss.sssZ±hhmm)"
-        }, {
-          "name": "labelCustomization",
-          "type": "JSON",
-          "info": "Optional: Json object. Label customization options. See README for more deatils."
-        }, {
-          "name": "shippingServiceId",
-          "type": "String",
-          "info": "Required: An Amazon-defined shipping service identifier. Get the ShippingServiceId value from a previous call to the GetEligibleShippingServices operation."
-        }, {
-          "name": "shippingServiceOfferId",
-          "type": "String",
-          "info": "Optional: An Amazon-defined shipping service offer identifier. Get the ShippingServiceOfferId value from a previous call to the GetEligibleShippingServices operation."
-        }, {
-          "name": "hazmatType",
-          "type": "String",
-          "info": "Optional: Hazardous materials options for a package. Possible values: 'None' - This package does not contain hazardous material; 'LQHazmat' - This package contains limited quantities of hazardous material."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    }, {
-      "name": "getShipment",
-      "description": "This endpoint returns an existing shipment for the ShipmentId value that you specify.",
-      "args": [
-        {
-          "name": "apiKey",
-          "type": "credentials",
-          "info": "Required: API key obtained from Amazon."
-        }, {
-          "name": "apiSecret",
-          "type": "credentials",
-          "info": "Required: API secret  obtained from Amazon."
-        }, {
-          "name": "appName",
-          "type": "String",
-          "info": "Required: The Application name."
-        }, {
-          "name": "appVersion",
-          "type": "String",
-          "info": "Required: The version of the application."
-        }, {
-          "name": "region",
-          "type": "String",
-          "test": "EU",
-          "info": "Required: The region for endpoint. For example: EU. Possible values: 'NA' (North America), 'EU' (Europe), 'IN' (India), 'CN' (China), 'JP' (Japan). NOTE: This operation is only available in the US, Germany, and UK marketplaces."
-        }, {
-          "name": "merchantId",
-          "type": "String",
-          "info": "Required: The merchant ID."
-        }, {
-          "name": "shipmentId",
-          "type": "String",
-          "info": "Required: An Amazon-defined shipment identifier. Get the shipmentId value from a previous call to the createShipment operation."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    }, {
-      "name": "cancelShipment",
-      "description": "The cancelShipment operation cancels an existing shipment and requests a refund for the ShipmentId value that you specify.",
-      "args": [
-        {
-          "name": "apiKey",
-          "type": "credentials",
-          "info": "Required: API key obtained from Amazon."
-        }, {
-          "name": "apiSecret",
-          "type": "credentials",
-          "info": "Required: API secret  obtained from Amazon."
-        }, {
-          "name": "appName",
-          "type": "String",
-          "info": "Required: The Application name."
-        }, {
-          "name": "appVersion",
-          "type": "String",
-          "info": "Required: The version of the application."
-        }, {
-          "name": "region",
-          "type": "String",
-          "test": "EU",
-          "info": "Required: The region for endpoint. For example: EU. Possible values: 'NA' (North America), 'EU' (Europe), 'IN' (India), 'CN' (China), 'JP' (Japan). NOTE: This operation is only available in the US, Germany, and UK marketplaces."
-        }, {
-          "name": "merchantId",
-          "type": "String",
-          "info": "Required: The merchant ID."
-        }, {
-          "name": "shipmentId",
-          "type": "String",
-          "info": "Required: An Amazon-defined shipment identifier. Get the shipmentId value from a previous call to the createShipment operation."
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    }
-  ]
+            "name": "cancelShipment",
+            "description": "The cancelShipment operation cancels an existing shipment and requests a refund for the ShipmentId value that you specify.",
+            "args": [{
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "API key obtained from Amazon.",
+                    "required": true
+                }, {
+                    "name": "apiSecret",
+                    "type": "credentials",
+                    "info": "API secret obtained from Amazon.",
+                    "required": true
+                }, {
+                    "name": "appName",
+                    "type": "String",
+                    "info": "The Application name.",
+                    "required": true
+                }, {
+                    "name": "appVersion",
+                    "type": "String",
+                    "info": "The version of the application.",
+                    "required": true
+                }, {
+                    "name": "region",
+                    "type": "String",
+                    "test": "EU",
+                    "info": "The region for endpoint. For example: EU. Possible values: 'NA' (North America), 'EU' (Europe), 'IN' (India), 'CN' (China), 'JP' (Japan). NOTE: This operation is only available in the US, Germany, and UK marketplaces.",
+                    "required": true
+                }, {
+                    "name": "merchantId",
+                    "type": "String",
+                    "info": "The merchant ID.",
+                    "required": true
+                }, {
+                    "name": "shipmentId",
+                    "type": "String",
+                    "info": "An Amazon-defined shipment identifier. Get the shipmentId value from a previous call to the createShipment operation.",
+                    "required": true
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "Error"
+                }, {
+                    "name": "success",
+                    "info": "Success"
+                }]
+        }]
 }

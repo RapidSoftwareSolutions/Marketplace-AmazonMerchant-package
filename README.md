@@ -1,5 +1,5 @@
 # AmazonMerchant Package
-The Recommendations API section of Amazon MWS enables you to programmatically retrieve Amazon Selling Coach recommendations by recommendation category. A recommendation is an actionable, timely, and personalized opportunity to increase your sales and performance.
+Manage Amazon shipments and listings.
 * Domain: amazon.com
 * Credentials: apiKey, apiSecret
 
